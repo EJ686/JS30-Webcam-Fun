@@ -9,7 +9,26 @@ function getVideo() {
         console.log(localMediaStream);
         video.src = window.URL.createObjectURL(localMediaStream); // Converts media stream into something the video player can understand
         video.play();
+    }).catch(err => {
+        console.error(`OH NO!!!`, err);
     });
+}
+
+function paintToCanvas() {
+    const width = video.videoWidth;
+    const height = video.videoHeight;
+    canvas.width = width;
+    canvas.height = height;
+    console.log(width, height);
+
+    return setInterval(() => {
+        ctx.drawImage(video, 0, 0, width, height);
+    }, 16);
+}
+
+function takePhoto() {
+    snap.currentTime = 0;
+    snap.play();
 }
 
 getVideo();
